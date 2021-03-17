@@ -1,5 +1,5 @@
-const { response } = require('express');
-const { validationResult } = require('express-validator');
+const { response, request } = require('express');
+const estado = require('../models/estado');
 
 const Estado = require('../models/estado');
 const getEstados = async(req, resp) => {
@@ -35,4 +35,36 @@ const crearEstados = async(req, res = response) => {
 
 
 }
-module.exports = { getEstados, crearEstados }
+
+const actualizarEstado = async(req, res = response) => {
+    const uid = req.params.id;
+
+
+    try {
+
+        const estadoDB = await Estado.findById(uid);
+        if (!estadoDB) { return res.status(404).json({ ok: false, msg: 'No existe un estado por ese id' }) }
+
+
+
+        // TODO: Validar token y comprobar si el usiario es correcto
+
+        //ACTUALIZACIONES
+        const campos = request.body;
+
+        const estadoActualizado = Estado.findByIdAndUpdate(uid, campos, { new: true });
+
+        res.json({
+            ok: true,
+            msg: "OK",
+            estado: estadoActualizado
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Eror inesperado",
+        })
+    }
+}
+module.exports = { getEstados, crearEstados, actualizarEstado }
