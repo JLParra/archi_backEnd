@@ -1,15 +1,18 @@
 const { response } = require('express');
+const { validationResult } = require('express-validator');
 
 const Estado = require('../models/estado');
-const getEstados = async (req, resp) => {
+const getEstados = async(req, resp) => {
+
     const estado = await Estado.find();
     resp.json({
         ok: true,
         estado
     });
 }
-const crearEstados = async (req, res = response) => {
+const crearEstados = async(req, res = response) => {
     const { id, codigo, descripcion, descripcion2 } = req.body;
+
 
     try {
 
