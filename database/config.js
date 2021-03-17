@@ -6,6 +6,7 @@ const dbConnection = async () => {
         mongoose.connection.openUri(process.env.DB_CNN, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            useCreateIndex: true,
         });
     } catch (error) {
         console.log(error);

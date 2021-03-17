@@ -16,14 +16,11 @@ dbConnection();
 //mean_user
 //jefferjlmk
 
+//LECTURA Y PARSEO DEL BODY
+app.use(express.json());
 
 //RUTAS
-app.get('/', (req, resp) => {
-    resp.status(400).json({
-        ok: true,
-        msg: "Hola mundo",
-    });
-});
+app.use('/api/estados', require('./routes/estados'));
 
 
 
