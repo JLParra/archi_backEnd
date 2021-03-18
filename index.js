@@ -21,6 +21,8 @@ app.use(express.json());
 
 //RUTAS
 app.use('/api/estados', require('./routes/estados'));
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
 
 
 
@@ -28,4 +30,3 @@ app.use('/api/estados', require('./routes/estados'));
 app.listen(process.env.PORT, () => {
     console.log("El servidor esta corriendo en el puerto: " + process.env.PORT);
 });
-
